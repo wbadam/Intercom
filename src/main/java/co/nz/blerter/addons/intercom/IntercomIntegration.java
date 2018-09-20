@@ -1,15 +1,47 @@
 package co.nz.blerter.addons.intercom;
 
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.AbstractJavaScriptExtension;
+import com.vaadin.shared.Registration;
+import com.vaadin.ui.UI;
 
 import java.util.Date;
+import java.util.Optional;
 
 @JavaScript("intercom.js")
 public class IntercomIntegration extends AbstractJavaScriptExtension {
 
+    private Registration viewChangeListenerHandle;
+
     public IntercomIntegration(String appId) {
         getState().appId = appId;
+    }
+
+    public void extend(UI target) {
+        super.extend(target);
+
+        Navigator navigator = target.getNavigator();
+        if (navigator != null) {
+            viewChangeListenerHandle = target.getNavigator().addViewChangeListener(new ViewChangeListener() {
+                @Override
+                public boolean beforeViewChange(ViewChangeEvent event) {
+                    return true;
+                }
+
+                @Override
+                public void afterViewChange(ViewChangeEvent event) {
+                    update();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void remove() {
+        Optional.ofNullable(viewChangeListenerHandle).ifPresent(Registration::remove);
+        super.remove();
     }
 
     public void setAppId(String appId) {

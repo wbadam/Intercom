@@ -16,7 +16,7 @@ public class IntercomComponentUsageUI extends AbstractTest {
         VerticalLayout layout = new VerticalLayout();
 
         IntercomIntegration intercom = new IntercomIntegration(APP_ID);
-        addExtension(intercom);
+        intercom.extend(this);
 
         Label label = new Label("This page should display Intercom icon on the bottom right corner.");
         layout.addComponents(label);
