@@ -1,4 +1,4 @@
-package nz.co.blerter.addons.intercom.uiserver;
+package co.nz.blerter.addons.intercom.uiserver;
 
 import org.vaadin.addonhelpers.TServer;
 
