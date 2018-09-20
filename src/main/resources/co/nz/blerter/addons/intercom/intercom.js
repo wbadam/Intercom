@@ -49,8 +49,12 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
     this.onStateChange = function() {
         if (!self.apiLoaded) {
             self.loadScript(self.getState().appId);
+            self.apiLoaded = true;
         } else {
             intercomSettings['app_id'] = self.getState().appId;
+
+            // Merge user data into intercom settings. Might not work for IE11.
+            intercomSettings = Object.assign(intercomSettings, self.getState().userData);
         }
     };
 
