@@ -3,9 +3,9 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
     var self = this;
     this.apiLoaded = false;
 
-    this.loadScript = function (id) {
+    this.loadScript = function (appId) {
         window.intercomSettings = {
-            app_id: id
+            app_id: appId
         };
 
         (function () {
@@ -29,7 +29,7 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
                     var s = d.createElement('script');
                     s.type = 'text/javascript';
                     s.async = true;
-                    s.src = 'https://widget.intercom.io/widget/' + id;
+                    s.src = 'https://widget.intercom.io/widget/' + appId;
                     var x = d.getElementsByTagName('script')[0];
                     x.parentNode.insertBefore(s, x);
                 }
@@ -49,6 +49,16 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
     this.onStateChange = function() {
         if (!self.apiLoaded) {
             self.loadScript(self.getState().appId);
+        } else {
+            intercomSettings['app_id'] = self.getState().appId;
         }
+    };
+
+    this.shutdown = function() {
+        Intercom('shutdown');
+    };
+
+    this.boot = function() {
+        Intercom('boot', intercomSettings);
     };
 };
