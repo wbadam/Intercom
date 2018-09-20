@@ -29,6 +29,10 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
         callFunction("shutdown");
     }
 
+    public void update() {
+        callFunction("update");
+    }
+
     public void setUserData(String attributeName, String data) {
         internalSetUserData(attributeName, data);
     }

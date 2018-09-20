@@ -65,4 +65,8 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
     this.boot = function() {
         Intercom('boot', intercomSettings);
     };
+
+    this.update = function() {
+        Intercom('update', intercomSettings);
+    }
 };
