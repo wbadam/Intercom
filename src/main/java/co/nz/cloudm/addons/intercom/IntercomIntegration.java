@@ -1,4 +1,4 @@
-package co.nz.blerter.addons.intercom;
+package co.nz.cloudm.addons.intercom;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.navigator.Navigator;

@@ -1,4 +1,4 @@
-package co.nz.blerter.addons.intercom;
+package co.nz.cloudm.addons.intercom;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

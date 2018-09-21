@@ -1,4 +1,4 @@
-window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
+window.co_nz_cloudm_addons_intercom_IntercomIntegration = function () {
 
     var self = this;
     this.apiLoaded = false;

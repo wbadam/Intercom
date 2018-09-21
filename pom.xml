@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>nz.co.blerter</groupId>
+    <groupId>nz.co.cloudm</groupId>
     <artifactId>intercom</artifactId>
     <version>0.1-SNAPSHOT</version>
     <name>Intercom integration</name>
     <packaging>bundle</packaging>
     <organization>
-        <name>Blerter</name>
+        <name>CloudM</name>
     </organization>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -90,7 +90,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>nz.co.blerter.addons.intercom.*</Export-Package>
+                        <Export-Package>nz.co.cloudm.addons.intercom.*</Export-Package>
                     </instructions>
                 </configuration>
                 <executions>
