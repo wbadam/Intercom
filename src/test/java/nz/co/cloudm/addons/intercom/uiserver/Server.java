@@ -1,4 +1,4 @@
-package co.nz.cloudm.addons.intercom.uiserver;
+package nz.co.cloudm.addons.intercom.uiserver;
 
 import org.vaadin.addonhelpers.TServer;
 

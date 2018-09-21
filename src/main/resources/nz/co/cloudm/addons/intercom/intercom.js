@@ -1,4 +1,4 @@
-window.co_nz_cloudm_addons_intercom_IntercomIntegration = function () {
+window.nz_co_cloudm_addons_intercom_IntercomIntegration = function () {
 
     var self = this;
     this.apiLoaded = false;

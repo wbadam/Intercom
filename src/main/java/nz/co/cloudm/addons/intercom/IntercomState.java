@@ -1,4 +1,4 @@
-package co.nz.cloudm.addons.intercom;
+package nz.co.cloudm.addons.intercom;
 
 import com.vaadin.shared.JavaScriptExtensionState;
 
