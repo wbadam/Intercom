@@ -13,10 +13,19 @@ import java.util.Optional;
 @JavaScript("intercom.js")
 public class IntercomIntegration extends AbstractJavaScriptExtension {
 
+    private static final String ATTR_EMAIL = "email";
+    private static final String ATTR_USER_ID = "user_id";
+
     private Registration viewChangeListenerHandle;
 
     public IntercomIntegration(String appId) {
-        getState().appId = appId;
+        setAppId(appId);
+    }
+
+    public IntercomIntegration(String appId, String userEmail, String userId) {
+        this(appId);
+        setUserEmail(userEmail);
+        setUserId(userId);
     }
 
     public void extend(UI target) {
@@ -50,6 +59,22 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
 
     public String getAppId() {
         return getState(false).appId;
+    }
+
+    public void setUserEmail(String email) {
+        setUserData(ATTR_EMAIL, email);
+    }
+
+    public String getUserEmail() {
+        return getUserData(ATTR_USER_ID).toString();
+    }
+
+    public void setUserId(String userId) {
+        setUserData(ATTR_USER_ID, userId);
+    }
+
+    public String getUserId() {
+        return getUserData(ATTR_USER_ID).toString();
     }
 
     public void boot(String appId) {
@@ -91,6 +116,12 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
 
     private void internalSetUserData(String attributeName, Object data) {
         getState().userData.put(attributeName, data);
+    }
+
+    public Optional<Object> getUserData(String attributeName) {
+        return getState().userData.containsKey(attributeName)
+                ? Optional.ofNullable(getState().userData.get(attributeName))
+                : Optional.empty();
     }
 
     public void removeUserData(String attributeName) {
