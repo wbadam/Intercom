@@ -2,6 +2,7 @@ package co.nz.cloudm.addons.intercom;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -9,6 +10,7 @@ import org.vaadin.addonhelpers.AbstractTest;
 
 public class IntercomComponentUsageUI extends AbstractTest {
 
+    /*** Replace this with a valid app id ***/
     private static String APP_ID = "APP_ID";
 
     @Override
@@ -18,21 +20,30 @@ public class IntercomComponentUsageUI extends AbstractTest {
         IntercomIntegration intercom = new IntercomIntegration(APP_ID);
         intercom.extend(this);
 
-        Label label = new Label("This page should display Intercom icon on the bottom right corner.");
-        layout.addComponents(label);
+        Label hint = new Label("This page should display Intercom icon on the bottom right corner after rebooted with app id. " +
+                "If visitors are not supported in Intercom, update user email and id.");
+        layout.addComponents(hint);
 
-        TextField idField = new TextField("App id");
-        Button bootButton = new Button("Boot");
-        bootButton.addClickListener(event -> {
-            intercom.boot(idField.getValue());
+        TextField appId = new TextField("App id");
+        Button boot = new Button("Boot", e -> {
+            intercom.boot(appId.getValue());
         });
-        layout.addComponents(idField, bootButton);
+        layout.addComponents(new HorizontalLayout(appId, boot));
 
-        Button shutdownButton = new Button("Shutdown");
-        shutdownButton.addClickListener(clk -> {
+        TextField userEmail = new TextField("User email");
+        TextField userId = new TextField("User ID");
+        Button update = new Button("Update", e -> {
+            intercom.setUserEmail(userEmail.getValue());
+            intercom.setUserId(userId.getValue());
+            intercom.update();
+        });
+        layout.addComponent(new HorizontalLayout(userEmail, userId, update));
+
+        Button shutdown = new Button("Shutdown");
+        shutdown.addClickListener(clk -> {
             intercom.shutdown();
         });
-        layout.addComponent(shutdownButton);
+        layout.addComponent(shutdown);
 
         return layout;
     }
