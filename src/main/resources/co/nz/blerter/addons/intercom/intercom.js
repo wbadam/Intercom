@@ -3,10 +3,9 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
     var self = this;
     this.apiLoaded = false;
 
-    this.loadScript = function (appId) {
-        window.intercomSettings = {
-            app_id: appId
-        };
+    this.loadScript = function (state) {
+        window.intercomSettings = {};
+        self.updateSettings(state);
 
         (function () {
             var w = window;
@@ -29,7 +28,7 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
                     var s = d.createElement('script');
                     s.type = 'text/javascript';
                     s.async = true;
-                    s.src = 'https://widget.intercom.io/widget/' + appId;
+                    s.src = 'https://widget.intercom.io/widget/' + state.appId;
                     var x = d.getElementsByTagName('script')[0];
                     x.parentNode.insertBefore(s, x);
                 }
@@ -46,15 +45,19 @@ window.co_nz_blerter_addons_intercom_IntercomIntegration = function () {
         })()
     };
 
+    this.updateSettings = function(state) {
+        window.intercomSettings['app_id'] = state.appId;
+
+        // Merge user data into intercom settings. Might not work for IE11.
+        window.intercomSettings = Object.assign(window.intercomSettings, state.userData);
+    };
+
     this.onStateChange = function() {
         if (!self.apiLoaded) {
-            self.loadScript(self.getState().appId);
+            self.loadScript(self.getState());
             self.apiLoaded = true;
         } else {
-            intercomSettings['app_id'] = self.getState().appId;
-
-            // Merge user data into intercom settings. Might not work for IE11.
-            intercomSettings = Object.assign(intercomSettings, self.getState().userData);
+            self.updateSettings(self.getState());
         }
     };
 
