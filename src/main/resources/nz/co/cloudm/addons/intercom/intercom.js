@@ -48,6 +48,24 @@ window.nz_co_cloudm_addons_intercom_IntercomIntegration = function () {
     this.updateSettings = function(state) {
         window.intercomSettings['app_id'] = state.appId;
 
+        if (state.userId) {
+            window.intercomSettings['user_id'] = state.userId;
+        } else {
+            delete window.intercomSettings['user_id'];
+        }
+
+        if (state.userEmail) {
+            window.intercomSettings['email'] = state.userEmail;
+        } else {
+            delete window.intercomSettings['email'];
+        }
+
+        if (state.userHash) {
+            window.intercomSettings['user_hash'] = state.userHash;
+        } else {
+            delete window.intercomSettings['user_hash'];
+        }
+
         // Merge user data into intercom settings. Might not work for IE11.
         window.intercomSettings = Object.assign(window.intercomSettings, state.userData);
     };
