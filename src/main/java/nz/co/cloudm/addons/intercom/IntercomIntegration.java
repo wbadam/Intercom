@@ -35,16 +35,15 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
     }
 
     /**
-     * Creates an Intercom integration extension with an app id.
+     * Creates an Intercom integration extension with an app id and generates hash function for user verification.
      *
      * @param appId     the app id given by Intercom
-     * @param userEmail email address of the logged in user
-     * @param userId    id of the logged in user
+     * @param secretKey secret key given by Intercom for hash-based message authentication code
+     * @see <a href="https://app.intercom.io/a/apps/vieinrsa/platform/guide/identify_your_users/identity_verification">Identity verification</a>
      */
-    public IntercomIntegration(String appId, String userEmail, String userId) {
-        this(appId);
-        setUserEmail(userEmail);
-        setUserId(userId);
+    public IntercomIntegration(String appId, String secretKey) {
+        setAppId(appId);
+        setSecretKey(secretKey);
     }
 
     /**
@@ -93,6 +92,19 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
      */
     public String getAppId() {
         return getState(false).appId;
+    }
+
+    /**
+     * Sets the email address and id for the logged in user. Also updates the user verification hash function if
+     * applicable.
+     *
+     * @param userEmail email address of the logged in user
+     * @param userId    id of the logged in user
+     */
+    public void setUser(String userEmail, String userId) {
+        getState().userEmail = userEmail;
+        getState().userId = userId;
+        setUserHash();
     }
 
     /**
