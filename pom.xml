@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nz.co.cloudm</groupId>
     <artifactId>intercom</artifactId>
-    <version>0.2.0</version>
+    <version>0.2-SNAPSHOT</version>
     <name>Intercom integration</name>
     <packaging>bundle</packaging>
     <organization>
@@ -26,7 +26,7 @@
         <url>https://github.com/${github.account}/${github.project}</url>
         <connection>scm:git:git://github.com/${github.account}/${github.project}.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:/${github.account}/${github.project}.git</developerConnection>
-      <tag>intercom-0.2.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <issueManagement>
         <system>GitHub</system>
