@@ -11,6 +11,7 @@ import com.vaadin.shared.Registration;
 import com.vaadin.ui.UI;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -38,7 +39,7 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
      * Creates an Intercom integration extension with an app id and generates hash function for user verification.
      *
      * @param appId     the app id given by Intercom
-     * @param secretKey secret key given by Intercom for hash-based message authentication code
+     * @param secretKey secret key given by Intercom for hash-based message authentication code, not null
      * @see <a href="https://app.intercom.io/a/apps/vieinrsa/platform/guide/identify_your_users/identity_verification">Identity verification</a>
      */
     public IntercomIntegration(String appId, String secretKey) {
@@ -251,10 +252,12 @@ public class IntercomIntegration extends AbstractJavaScriptExtension {
     /**
      * Sets secret key given by Intercom for hash-based message authentication code and creates hash function.
      *
-     * @param key
+     * @param key intercom secret API key, not null
      * @see <a href="https://app.intercom.io/a/apps/vieinrsa/platform/guide/identify_your_users/identity_verification">Identity verification</a>
      */
     public void setSecretKey(String key) {
+        Objects.requireNonNull(key);
+
         this.hashFunction = createHashFunction(key);
         setUserHash();
     }
